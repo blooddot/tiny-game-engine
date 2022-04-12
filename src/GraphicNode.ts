@@ -12,8 +12,14 @@ export default class GraphicNode {
         Model.dirty = true;
     }
 
-    private _x = 0;
-    private _y = 0;
+    protected _x = 0;
+    public get x(): number {
+        return this._x;
+    }
+    protected _y = 0;
+    public get y(): number {
+        return this._y;
+    }
     public setPos(x: number, y: number) {
         this._x = x;
         this._y = y;
@@ -47,5 +53,15 @@ export default class GraphicNode {
         if (!this._children.length) return;
 
         this._children.forEach(child => child.render());
+    }
+
+    public $update(deltaTime: number) {
+        this._children.forEach(child => child.$update(deltaTime));
+
+        this.onUpdate(deltaTime);
+    }
+
+    protected onUpdate(deltaTime: number): void {
+        //
     }
 }

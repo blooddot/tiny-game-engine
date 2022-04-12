@@ -20,7 +20,10 @@
     img.onload = () => {
         ctx.drawImage(img, 0, 0, img.width, img.height);
     }
-    function update(deltaTime) {
+    function update() {
+
+    }
+    function render() {
         img.src = './resource/background.jpg';
     }
 
@@ -38,6 +41,7 @@
         const deltaTime = timestamp - preTimestamp;
         preTimestamp = timestamp;
         update(deltaTime);
+        render();
         requestAnimationFrame(onTick);
     }
 
@@ -55,6 +59,7 @@
     //         update(deltaTime);
     //         remainTime -= MS_PER_UPDATE;
     //     }
+    //     render();
     //     requestAnimationFrame(onTick);
     // }
 
@@ -70,7 +75,7 @@
     //             update(deltaTime);
     //             remainTime -= MS_PER_UPDATE;
     //         }
-
+    //         render();
     //         ticker();
     //     }, 1);
     // }
@@ -87,6 +92,7 @@
     //         update(deltaTime);
     //         remainTime -= MS_PER_UPDATE;
     //     }
+    //     render();
     // }
 </script>
 

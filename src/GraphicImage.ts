@@ -11,6 +11,8 @@ export default class GraphicImage extends GraphicNode {
 
         this._img = new Image();
         this._img.onload = () => {
+            this._width = this._width || this._img.width;
+            this._height = this._height || this._img.height;
             Model.dirty = true;
         }
         return this._img;
@@ -31,9 +33,25 @@ export default class GraphicImage extends GraphicNode {
         }
     }
 
+    private _width: number;
+    public get width(): number {
+        return this._width;
+    }
+    private _height: number;
+    public get height(): number {
+        return this._height;
+    }
+    public setSize(width: number, height: number) {
+        if (this._width === width && this._height === height) return;
+
+        this._width = width;
+        this._height = height;
+        Model.dirty = true;
+    }
+
     render() {
         if (!this._img) return;
 
-        Model.ctx.drawImage(this._img, this.globalX, this.globalY, this._img.width, this._img.height);
+        Model.ctx.drawImage(this._img, this.globalX, this.globalY, this._width, this._height);
     }
 }
