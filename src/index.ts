@@ -26,9 +26,10 @@ function onTick(timestamp: number) {
     preTimestamp = timestamp;
     remainTime += deltaTime;
 
-    while (remainTime >= MS_PER_UPDATE) {
+    const msTime = Math.min(MS_PER_UPDATE, timestamp)
+    while (remainTime >= msTime) {
         update(deltaTime);
-        remainTime -= MS_PER_UPDATE;
+        remainTime -= msTime;
     }
 
     render();

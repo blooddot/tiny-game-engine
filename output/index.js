@@ -399,9 +399,10 @@ function onTick(timestamp) {
     var deltaTime = timestamp - preTimestamp;
     preTimestamp = timestamp;
     remainTime += deltaTime;
-    while (remainTime >= MS_PER_UPDATE) {
+    var msTime = Math.min(MS_PER_UPDATE, timestamp);
+    while (remainTime >= msTime) {
         update(deltaTime);
-        remainTime -= MS_PER_UPDATE;
+        remainTime -= msTime;
     }
     render();
     requestAnimationFrame(onTick);
